@@ -8,7 +8,11 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "ngx",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -25,6 +29,7 @@
             "styles": [
               "src/styles.css"
             ],
+            
             "scripts": []
           },
           "configurations": {
@@ -115,6 +120,51 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-editor": {
+      "root": "projects/ngx-editor",
+      "sourceRoot": "projects/ngx-editor/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-editor/tsconfig.lib.json",
+            "project": "projects/ngx-editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-editor/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-editor/src/test.ts",
+            "tsConfig": "projects/ngx-editor/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-editor/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-editor/tsconfig.lib.json",
+              "projects/ngx-editor/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
