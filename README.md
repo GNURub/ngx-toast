@@ -2,7 +2,7 @@
 
 ```ts
     ...
-    import { EditorModule } from 'projects/editor/src/public_api';
+    import { EditorModule } from 'ngx-editor';
 
     @NgModule({
     declarations: [
